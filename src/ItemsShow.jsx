@@ -12,9 +12,9 @@ export function ItemsShow(props) {
 
   return (
     <div>
-      <h1>Items information</h1>
+      <h1>Anime Information</h1>
       <p>Name: {props.item.name}</p>
-      <p>Url: {props.item.url}</p>
+      <p>Image_url: {props.item.image_url}</p>
       <p>Description: {props.item.description}</p>
       <p>Category: {props.item.category}</p>
       <form onSubmit={handleSubmit}>
@@ -22,13 +22,13 @@ export function ItemsShow(props) {
           Name: <input defaultValue={props.item.name} name="name" type="text" />
         </div>
         <div>
-          Image_url: <input defaultValue={props.item.url} name="url" type="text" />
+          Image_url: <input defaultValue={props.item.image_url} name="url" type="text" />
         </div>
         <div>
-          Description: <input defaultValue={props.item.Description} name="Description" type="text" />
+          Description: <input defaultValue={props.item.description} name="Description" type="text" />
         </div>      
         <div>
-          Category: <input defaultValue={props.item.Category} name="Category" type="text" />
+          Category: <input defaultValue={props.item.category} name="Category" type="text" />
         </div>
         <button type="submit">Update item</button>
       </form>

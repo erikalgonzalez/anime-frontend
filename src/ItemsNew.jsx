@@ -1,4 +1,9 @@
+import React, {useState} from "react";
+import axios from "axios";
+
 export function ItemsNew(props) {
+
+  const isAdmin = true;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -8,7 +13,8 @@ export function ItemsNew(props) {
 
   return (
     <div>
-      <h1>New Items</h1>
+      <h1>New Item</h1>
+      {isAdmin ? (
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" />
@@ -24,6 +30,9 @@ export function ItemsNew(props) {
         </div>
         <button type="submit">Create Item</button>
       </form>
+      ) : (
+        <p>You do not have permission to create a new item.</p>
+      )}
     </div>
   );
 }

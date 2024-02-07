@@ -42,6 +42,9 @@ export function Signup() {
         <div>
           Password confirmation: <input name="password_confirmation" type="password" />
         </div>
+        <div>
+          image_url: <input name="image_url" type="image_url" />
+        </div>
         <button type="submit">Signup</button>
       </form>
     </div>

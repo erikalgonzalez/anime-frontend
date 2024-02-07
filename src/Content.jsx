@@ -4,6 +4,10 @@ import { ItemsIndex } from "./ItemsIndex"
 import { ItemsNew } from "./ItemsNew";
 import { ItemsShow } from "./ItemsShow";
 import { Modal } from "./Modal";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "./Login";
+import { Signup } from "./Signup";
+import { LogoutLink } from "./LogoutLink";
 
 export function Content() {
   const [items, setItems] = useState([]);
@@ -67,14 +71,20 @@ export function Content() {
   useEffect(handleIndexItems, []);
 
   return (
-    <div>
-      <h1>Welcome to React!</h1>
-      <ItemsNew onCreateItem={handleCreateItem}/>
-      <ItemsIndex items={items} onShowItem={handleShowItem} />
-      <Modal show={isItemsShowVisible} onClose={handleClose}>
-        <h1>Test</h1>
-        <ItemsShow item={currentItem} onUpdateItem={handleUpdateItem} onDestroyItem />
-      </Modal>
-    </div>
+    <Router>
+      <div>
+        <h1>Welcome to Anime Hub!</h1>
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<LogoutLink />} />
+          <Route path="/" element={<ItemsIndex items={items} onShowItem={handleShowItem} />} />
+          <Route path="/items/new" element={<ItemsNew onCreateItem={handleCreateItem}/>} />
+        </Routes>
+        <Modal show={isItemsShowVisible} onClose={handleClose}>
+          <ItemsShow item={currentItem} onUpdateItem={handleUpdateItem} onDestroyItem={handleDestroyItem} />
+        </Modal>
+      </div>
+    </Router>
   );
 }
