@@ -8,11 +8,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
 import { LogoutLink } from "./LogoutLink";
+import { FavoritesIndex } from "./FavoritesIndex";
+import { FavoritesShow } from "./FavoritesShow";
 
 export function Content() {
   const [items, setItems] = useState([]);
   const [isItemsShowVisible, setIsItemsShowVisible] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
+  const [favorites, setFavorites] = useState([]); 
 
   const handleIndexItems = () => {
     console.log("handleIndexItems");
@@ -70,16 +73,53 @@ export function Content() {
 
   useEffect(handleIndexItems, []);
 
+  const handleIndexFavorites = () => {
+    console.log("handleIndexFavorites");
+    axios.get("http://localhost:3000/favorites.json").then((response) => {
+      console.log(response.data);
+      setFavorites(response.data);
+    });
+  };
+
+  const handleAddToFavorites = (itemId) => {
+    axios.post(`http://localhost:3000/favorites.json`, { favorite: {item_id: itemId}  })
+      .then((response) => {
+        setFavorites((prevFavorites) => [...prevFavorites, response.data]);
+      })
+      .catch((error) => {
+        console.error('Error adding to favorites:', error);
+        // console.log('Error response', error.response.data);
+      });
+  };
+  
+
+  const handleDestroyFavorite = (favorite) => {
+    console.log("handleDestroyFavorite", favorite);
+    axios.delete(`http://localhost:3000/favorites/${favorite.id}.json`)
+      .then((response) => {
+        setFavorites((prevFavorites) => prevFavorites.filter((f) => f.id !== favorite.id));
+        handleClose();
+      })
+      .catch((error) => {
+        console.error('Error removing favorite:', error);
+      });
+  };
+
+  useEffect(handleIndexFavorites, []);
+
+
   return (
     <Router>
       <div>
-        <h1>Welcome to Anime Hub!</h1>
+        <h1>Anime Hub!</h1>
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<LogoutLink />} />
-          <Route path="/" element={<ItemsIndex items={items} onShowItem={handleShowItem} />} />
+          <Route path="/" element={<ItemsIndex items={items} onShowItem={handleShowItem} onAddToFavorites={handleAddToFavorites} />} />
           <Route path="/items/new" element={<ItemsNew onCreateItem={handleCreateItem}/>} />
+          <Route path="/favorites" element={<FavoritesIndex favorites={favorites} onRemove={handleDestroyFavorite} />} />
+          <Route path="/favorites/:id" element={<FavoritesShow onRemove={handleDestroyFavorite} />} />
         </Routes>
         <Modal show={isItemsShowVisible} onClose={handleClose}>
           <ItemsShow item={currentItem} onUpdateItem={handleUpdateItem} onDestroyItem={handleDestroyItem} />
