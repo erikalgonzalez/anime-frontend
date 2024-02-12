@@ -10,6 +10,7 @@ import { Signup } from "./Signup";
 import { LogoutLink } from "./LogoutLink";
 import { FavoritesIndex } from "./FavoritesIndex";
 import { FavoritesShow } from "./FavoritesShow";
+import { ProfilePage } from "./ProfilePage"
 
 export function Content() {
   const [items, setItems] = useState([]);
@@ -120,6 +121,7 @@ export function Content() {
           <Route path="/items/new" element={<ItemsNew onCreateItem={handleCreateItem}/>} />
           <Route path="/favorites" element={<FavoritesIndex favorites={favorites} onRemove={handleDestroyFavorite} />} />
           <Route path="/favorites/:id" element={<FavoritesShow onRemove={handleDestroyFavorite} />} />
+          <Route path="/users/:id" element={<ProfilePage />} />
         </Routes>
         <Modal show={isItemsShowVisible} onClose={handleClose}>
           <ItemsShow item={currentItem} onUpdateItem={handleUpdateItem} onDestroyItem={handleDestroyItem} />
