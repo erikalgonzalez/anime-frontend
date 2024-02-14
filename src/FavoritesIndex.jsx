@@ -6,18 +6,38 @@ export function FavoritesIndex({ favorites, onRemove }) {
   };
 
   return (
-    <div>
-      <h1>All Favorites</h1>
-      {favorites.map(favorite => (
-        <div key={favorite.id}>
-          <h2>{favorite.item.name}</h2>
-          <img src={favorite.item.image_url} alt={favorite.item.name} />
-          <p>Description: {favorite.item.description}</p>
-          <p>Category: {favorite.item.category}</p>
-          <button onClick={() => handleRemove(favorite)}>Remove from Favorites</button>
-        </div>
-      ))}
+    <div className="container">
+      <h1 className="text-center"> All Favorites</h1>
+      <div className="row justify-content-center">
+        {favorites.map(favorite =>(
+          <div className="col-md-4 mb-4" key={favorite.item.id} >
+            <div className="card border-dark h-100">
+            <img src={favorite.item.image_url} className="card-img-top" alt={favorite.item.name} />
+              <h2 className="card-title">{favorite.item.name}</h2>
+              <div className="card-body">
+              <p className="card-text">Description: {favorite.item.description}</p>
+              <p className="card-text">Category: {favorite.item.category}</p>
+              <button onClick={() => handleRemove(favorite)}>Remove from Favorites</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
+
+
+    // <div>
+    //   <h1>All Favorites</h1>
+    //   {favorites.map(favorite => (
+    //     <div key={favorite.id}>
+    //       <h2>{favorite.item.name}</h2>
+          // <img src={favorite.item.image_url} alt={favorite.item.name} />
+          // <p>Description: {favorite.item.description}</p>
+    //       <p>Category: {favorite.item.category}</p>
+          // <button onClick={() => handleRemove(favorite)}>Remove from Favorites</button>
+    //     </div>
+    //   ))}
+    // </div>
   );
 }
 

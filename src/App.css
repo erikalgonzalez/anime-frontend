@@ -1,4 +1,51 @@
-#root {
+.navbar-brand {
+  font-size: 35px !important;
+  /* Add !important */
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(15, 146, 183, 0.92);
+  transition: background-color 0.3s ease;
+}
+
+.logout-button {
+  font-size: 35px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-card {
+  width: 50%;
+}
+
+.custom-login-form {
+  width: 100%;
+}
+
+.custom-login-form input[type="email"],
+.custom-login-form input[type="password"] {
+  width: 100%;
+}
+
+.custom-login-form button {
+  width: 100%;
+}
+
+.signup-card {
+  width: 50%;
+}
+
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -11,9 +58,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +71,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +89,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */

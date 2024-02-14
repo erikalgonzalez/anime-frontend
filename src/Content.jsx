@@ -112,7 +112,6 @@ export function Content() {
   return (
     <Router>
       <div>
-        <h1>Anime Hub!</h1>
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
